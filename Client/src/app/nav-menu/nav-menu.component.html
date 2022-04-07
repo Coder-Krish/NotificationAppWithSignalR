@@ -1,0 +1,75 @@
+<header>  
+    <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>  
+      <div class="container">  
+        <a class="navbar-brand" [routerLink]='["/"]'>Employee App</a>  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"  
+          aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">  
+          <span class="navbar-toggler-icon"></span>  
+        </button>  
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>  
+          <ul class="navbar-nav flex-grow">  
+            <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>  
+              <a class="nav-link text-dark" [routerLink]='["/home"]'>Home</a>  
+            </li>  
+            <li class="nav-item" [routerLinkActive]='["link-active"]'>  
+              <a class="nav-link text-dark" [routerLink]='["/employees"]'>Employees</a>  
+            </li>  
+            <i class="fa fa-bell  has-badge" style="cursor: pointer;" (click)="openModal()" data-bs-toggle="modal" data-bs-target="#notificationModal"></i>  
+            <div class="numberCircle" *ngIf="notification && notification?.count>0" style="cursor: pointer;"  
+              (click)="openModal()" data-bs-toggle="modal" data-bs-target="#notificationModal">  
+              {{notification?.count}}</div>  
+          </ul>  
+        </div>  
+      </div>  
+    </nav>  
+  </header>  
+  <footer>  
+    <nav class="navbar navbar-light bg-white mt-5 fixed-bottom">  
+      <div class="navbar-expand m-auto navbar-text">  
+        <b>Krishna Bogati</b>  
+      </div>  
+    </nav>  
+  </footer>  
+    
+  <!-- <app-modal id="custom-modal">  
+    <button class="btn btn-primary" (click)="deleteNotifications();" style="margin-right: 10px;" [disabled]="notification?.count==0">Delete all Notifications</button>  
+    <button class="btn btn-secondary" (click)="closeModal();">Close</button>  
+    <div style="margin-bottom: 10px;"></div>  
+    <div *ngFor="let msg of messages" [ngSwitch]="msg.tranType">  
+      <h6 *ngSwitchCase="'Add'"><span class="badge badge-success">New employee '{{msg.employeeName}}' added</span></h6>  
+      <h6 *ngSwitchCase="'Edit'"><span class="badge badge-info">Employee '{{msg.employeeName}}' edited</span></h6>  
+      <h6 *ngSwitchCase="'Delete'"><span class="badge badge-warning">Employee '{{msg.employeeName}}' deleted</span></h6>  
+    </div>  
+  </app-modal>  -->
+
+<!-- Modal -->
+<div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf = "messages && messages.length">
+        <button class="badge bg-dark" (click)="deleteNotifications();" style="padding: 5px; font-size: 10px; margin: 10px; float: right;" [disabled]="notification?.count==0">Mark All As Read</button>  
+        <br>
+         <table class="table table-stripped" style="margin-top: 10px;">
+            <tr *ngFor="let msg of messages" [ngSwitch] = "msg.tranType">
+              <td *ngSwitchCase = "'Add'">
+                <span  class="badge bg-success"  style="width:100%">New employee '{{msg.employeeName}}' added</span>
+              </td>
+              <td *ngSwitchCase = "'Edit'" >
+                <span class="badge bg-info text-dark"  style="width:100%">Employee '{{msg.employeeName}}' edited</span>
+              </td>
+              <td *ngSwitchCase = "'Delete'">
+                <span class="badge bg-danger"  style="width:100%">Employee '{{msg.employeeName}}' deleted</span>
+              </td>
+            </tr>
+          </table>
+      </div>
+      <div class="modal-body" *ngIf = "!(messages && messages.length)">
+        <span>No new Notificaitons.</span>
+      </div>
+    </div>
+  </div>
+</div>

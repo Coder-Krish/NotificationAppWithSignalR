@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "VIers+0jf03u+RJA+DZ8z/xoZRA7cjleTnpT0cHkO80=",
+  "Source": "NotificationWithSignalR",
+  "BasePath": "_content/NotificationWithSignalR",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
